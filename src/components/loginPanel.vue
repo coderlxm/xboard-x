@@ -14,6 +14,8 @@ const pwd = ref('')
       <div style="width: 90%;margin: 0 auto;">
         <n-input class="mb-5" v-model:value="username" type="text" placeholder="邮箱" />
         <n-input v-model:value="pwd" type="password" placeholder="密码" />
+        <n-input v-if="false" v-model:value="pwd" type="password" placeholder="密码" />
+        <n-input v-if="false" v-model:value="pwd" type="password" placeholder="邀请码（必填）" />
       </div>
       <div style="width: 90%;margin: 20px auto;">
         <n-button style="width: 100%;" color="#316C72FF">
