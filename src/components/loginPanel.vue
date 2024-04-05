@@ -2,6 +2,8 @@
 import { ref } from "vue";
 import { useRouter } from "vue-router";
 import languageSel from "./languageSel.vue";
+import { useNotification } from 'naive-ui'
+const notificationApiInjection = useNotification();
 
 const username = ref('')
 const pwd = ref('')
@@ -11,6 +13,18 @@ const register = () => {
 }
 const forgetPassword = () => {
   router.push({ name: 'forgetpassword' })
+}
+const login = async () => {
+  if (username.value.trim() && pwd.value.trim()) {
+    localStorage.setItem('token', 'admin')
+    await router.push({ name: 'home' })
+  } else {
+    notificationApiInjection.warning({
+      content: "请输入用户名和密码",
+      closable: false,
+      duration: 2000
+    })
+  }
 }
 </script>
 
@@ -26,7 +40,7 @@ const forgetPassword = () => {
         <n-input show-password-on="click" v-model:value="pwd" type="password" placeholder="密码" />
       </div>
       <div style="width: 90%;margin: 20px auto;">
-        <n-button style="width: 100%;" color="#316C72FF">
+        <n-button @click="login" style="width: 100%;" color="#316C72FF">
           <!-- <template #icon>
             <n-icon>
               <cash-icon />

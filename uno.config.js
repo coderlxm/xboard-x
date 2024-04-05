@@ -20,4 +20,7 @@ export default defineConfig({
   //     },
   //   }),
   // ],
+  rules: [
+    ['color-primary', { color: '#316c72' }],
+  ]
 })

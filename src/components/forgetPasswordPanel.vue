@@ -14,6 +14,7 @@ const isValidEmail = (email) => {
     closable: false,
     duration: 2000
   })
+  else return true
 }
 const backToLogin = () => {
   router.push({ name: 'login' })
@@ -29,20 +30,21 @@ const isSent = ref(false)
 const nextTime = ref(60)
 const sendAuthcode = async () => {
   if (username.value.trim() !== '') {
-    isValidEmail(username.value)
-    const res = await new Promise((resolve, reject) => {
-      resolve('发送成功')
-    })
-    if (res) {
-      isSent.value = true
-      let interval = setInterval(() => {
-        nextTime.value -= 1
-        if (nextTime.value === 0) clearInterval(interval)
-      }, 1000)
-      setTimeout(() => {
-        isSent.value = false
-        nextTime.value = 60
-      }, 60000)
+    if (isValidEmail(username.value) === true) {
+      const res = await new Promise((resolve, reject) => {
+        resolve('发送成功')
+      })
+      if (res) {
+        isSent.value = true
+        let interval = setInterval(() => {
+          nextTime.value -= 1
+          if (nextTime.value === 0) clearInterval(interval)
+        }, 1000)
+        setTimeout(() => {
+          isSent.value = false
+          nextTime.value = 60
+        }, 60000)
+      }
     }
   } else {
     notificationApiInjection.info({

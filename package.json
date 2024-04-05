@@ -20,6 +20,7 @@
   "devDependencies": {
     "@unocss/preset-uno": "0.59.0-beta.1",
     "@unocss/transformer-directives": "0.59.0-beta.1",
+    "@vicons/ionicons5": "^0.12.0",
     "@vitejs/plugin-vue": "^5.0.4",
     "eslint": "^8.49.0",
     "eslint-plugin-vue": "^9.17.0",

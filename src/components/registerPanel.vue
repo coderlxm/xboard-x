@@ -1,7 +1,9 @@
 <script setup>
 import { ref } from "vue";
 import { useRouter } from "vue-router";
+import { useNotification } from 'naive-ui'
 import languageSel from "./languageSel.vue";
+const notificationApiInjection = useNotification();
 const router = useRouter()
 const username = ref('')
 const repwd = ref('')
@@ -9,6 +11,33 @@ const pwd = ref('')
 const invitecode = ref('')
 const backToLogin = () => {
   router.push({ name: 'login' })
+}
+const register = async () => {
+  if (username.value && pwd.value && repwd.value) {
+    if (pwd.value !== repwd.value) {
+      return notificationApiInjection.info({
+        content: "两次输入的密码不一致",
+        closable: false,
+        duration: 2000
+      })
+    } else {
+      const res = await new Promise((resolve) => {
+        resolve('注册成功')
+      })
+      notificationApiInjection.success({
+        content: res,
+        closable: false,
+        duration: 2000
+      })
+      router.push({ name: 'login' })
+    }
+  } else {
+    notificationApiInjection.info({
+      content: "请输入账号密码",
+      closable: false,
+      duration: 2000
+    })
+  }
 }
 </script>
 
@@ -26,13 +55,13 @@ const backToLogin = () => {
         <n-input v-model:value="invitecode" type="text" placeholder="邀请码（必填）" />
       </div>
       <div style="width: 90%;margin: 20px auto;">
-        <n-button style="width: 100%;" color="#316C72FF">
+        <n-button @click="register" style="width: 100%;" color="#316C72FF">
           <!-- <template #icon>
             <n-icon>
               <cash-icon />
             </n-icon>
           </template> -->
-          登入
+          注册
         </n-button>
       </div>
       <div class="bottom-banner">
@@ -40,7 +69,7 @@ const backToLogin = () => {
           <a class="mr-4 color-#6c757d" @click="backToLogin">返回登入</a>
         </div>
         <div>
-            <languageSel></languageSel>
+          <languageSel></languageSel>
         </div>
       </div>
     </n-card>
