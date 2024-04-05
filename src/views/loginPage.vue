@@ -7,11 +7,9 @@ const routes = useRoute()
 </script>
 <template>
   <div class="full-screen-image">
-    <n-notification-provider>
-      <forgetPasswordPanel v-if="routes.name === 'forgetpassword'"></forgetPasswordPanel>
-      <registerPanel v-else-if="routes.name === 'register'"></registerPanel>
-      <loginPanel v-else></loginPanel>
-    </n-notification-provider>
+    <forgetPasswordPanel v-if="routes.name === 'forgetpassword'"></forgetPasswordPanel>
+    <registerPanel v-else-if="routes.name === 'register'"></registerPanel>
+    <loginPanel v-else></loginPanel>
   </div>
 </template>
 <style>

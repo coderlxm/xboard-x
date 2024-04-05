@@ -1,6 +1,8 @@
 <script setup>
 import { ref } from "vue";
 import { useRouter } from "vue-router";
+import languageSel from "./languageSel.vue";
+
 const username = ref('')
 const pwd = ref('')
 const router = useRouter()
@@ -39,7 +41,7 @@ const forgetPassword = () => {
           <a class="color-#6c757d" @click="forgetPassword">忘记密码</a>
         </div>
         <div>
-          简体中文
+          <languageSel></languageSel>
         </div>
       </div>
     </n-card>

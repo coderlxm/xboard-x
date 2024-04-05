@@ -1,6 +1,7 @@
 <script setup>
 import { ref } from "vue";
 import { useRouter } from "vue-router";
+import languageSel from "./languageSel.vue";
 const router = useRouter()
 const username = ref('')
 const repwd = ref('')
@@ -39,7 +40,7 @@ const backToLogin = () => {
           <a class="mr-4 color-#6c757d" @click="backToLogin">返回登入</a>
         </div>
         <div>
-          简体中文
+            <languageSel></languageSel>
         </div>
       </div>
     </n-card>
