@@ -1,14 +1,24 @@
 <script setup>
 import { ref } from "vue";
 import { useRouter } from "vue-router";
-const username = ref('')
-const pwd = ref('')
+import { useNotification } from 'naive-ui'
+const notificationApiInjection = useNotification();
 const router = useRouter()
-const register = () => {
-  router.push({ name: 'register' })
+const backToLogin = () => {
+  router.push({ name: 'login' })
 }
-const forgetPassword = () => {
-  router.push({ name: 'forgetpassword' })
+const username = ref('')
+const authcode = ref('')
+const repwd = ref('')
+const pwd = ref('')
+const sendAuthcode = () => {
+  if (authcode.value.trim() === '') {
+    notificationApiInjection.info({
+      content: "请输入邮箱地址",
+      closable: false,
+      duration: 2000
+    })
+  }
 }
 </script>
 
@@ -21,7 +31,14 @@ const forgetPassword = () => {
       </div>
       <div style="width: 90%;margin: 0 auto;">
         <n-input class="mb-5" v-model:value="username" type="text" placeholder="邮箱" />
-        <n-input show-password-on="click" v-model:value="pwd" type="password" placeholder="密码" />
+        <n-input-group class="mb-5">
+          <n-input v-model:value="authcode" placeholder="邮箱验证码" />
+          <n-button @click="sendAuthcode" color="#316c72" type="primary">
+            发送
+          </n-button>
+        </n-input-group>
+        <n-input class="mb-5" show-password-on="click" v-model:value="pwd" type="password" placeholder="密码" />
+        <n-input v-model:value="repwd" show-password-on="click" type="password" placeholder="再次输入密码" />
       </div>
       <div style="width: 90%;margin: 20px auto;">
         <n-button style="width: 100%;" color="#316C72FF">
@@ -35,8 +52,7 @@ const forgetPassword = () => {
       </div>
       <div class="bottom-banner">
         <div>
-          <a class="mr-4 color-#6c757d" @click="register">注册</a>
-          <a class="color-#6c757d" @click="forgetPassword">忘记密码</a>
+          <a class="mr-4 color-#6c757d" @click="backToLogin">返回登录</a>
         </div>
         <div>
           简体中文

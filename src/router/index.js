@@ -6,7 +6,7 @@ const router = createRouter({
 })
 router.beforeEach((to) => {
   const token = localStorage.getItem('token')
-  if (to.name !== 'login' && !token) {
+  if ((to.name !== 'login' && to.name !== 'register' && to.name !== 'forgetpassword') && !token) {
     return { name: 'login' }
   }
 })

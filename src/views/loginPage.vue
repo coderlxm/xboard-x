@@ -1,19 +1,34 @@
 <script setup>
 import loginPanel from "@/components/loginPanel.vue";
+import forgetPasswordPanel from "@/components/forgetPasswordPanel.vue";
+import registerPanel from "@/components/registerPanel.vue";
+import { useRoute } from "vue-router";
+const routes = useRoute()
 </script>
 <template>
   <div class="full-screen-image">
-    <loginPanel></loginPanel>
+    <n-notification-provider>
+      <forgetPasswordPanel v-if="routes.name === 'forgetpassword'"></forgetPasswordPanel>
+      <registerPanel v-else-if="routes.name === 'register'"></registerPanel>
+      <loginPanel v-else></loginPanel>
+    </n-notification-provider>
   </div>
 </template>
 <style>
 .full-screen-image {
   overflow: hidden;
-  height: 100vh;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
   width: 100vw;
   background-image: url('/src/assets/1920.jpg');
   background-size: cover;
   /* background-position: center; */
   background-repeat: no-repeat;
+}
+
+a {
+  cursor: pointer;
 }
 </style>

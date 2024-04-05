@@ -1,14 +1,13 @@
 <script setup>
 import { ref } from "vue";
 import { useRouter } from "vue-router";
-const username = ref('')
-const pwd = ref('')
 const router = useRouter()
-const register = () => {
-  router.push({ name: 'register' })
-}
-const forgetPassword = () => {
-  router.push({ name: 'forgetpassword' })
+const username = ref('')
+const repwd = ref('')
+const pwd = ref('')
+const invitecode = ref('')
+const backToLogin = () => {
+  router.push({ name: 'login' })
 }
 </script>
 
@@ -21,7 +20,9 @@ const forgetPassword = () => {
       </div>
       <div style="width: 90%;margin: 0 auto;">
         <n-input class="mb-5" v-model:value="username" type="text" placeholder="邮箱" />
-        <n-input show-password-on="click" v-model:value="pwd" type="password" placeholder="密码" />
+        <n-input class="mb-5" show-password-on="click" v-model:value="pwd" type="password" placeholder="密码" />
+        <n-input class="mb-5" show-password-on="click" v-model:value="repwd" type="password" placeholder="再次输入密码" />
+        <n-input v-model:value="invitecode" type="text" placeholder="邀请码（必填）" />
       </div>
       <div style="width: 90%;margin: 20px auto;">
         <n-button style="width: 100%;" color="#316C72FF">
@@ -35,8 +36,7 @@ const forgetPassword = () => {
       </div>
       <div class="bottom-banner">
         <div>
-          <a class="mr-4 color-#6c757d" @click="register">注册</a>
-          <a class="color-#6c757d" @click="forgetPassword">忘记密码</a>
+          <a class="mr-4 color-#6c757d" @click="backToLogin">返回登入</a>
         </div>
         <div>
           简体中文

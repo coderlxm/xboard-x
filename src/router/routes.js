@@ -8,6 +8,22 @@ const routes = [
     component: () => import('@/views/loginPage.vue')
   },
   {
+    name: 'register',
+    path: '/register',
+    meta: {
+      isLogin: true
+    },
+    component: () => import('@/views/loginPage.vue')
+  },
+  {
+    name: 'forgetpassword',
+    path: '/forgetpassword',
+    meta: {
+      isLogin: true
+    },
+    component: () => import('@/views/loginPage.vue')
+  },
+  {
     name: 'home',
     path: '/home',
     component: () => import('@/views/homePage.vue')
