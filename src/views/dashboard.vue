@@ -1,6 +1,41 @@
 <script setup>
+import { ref } from "vue";
 import { useRouter } from "vue-router";
 const router = useRouter()
+const showModal = ref(false)
+const shortcuts = [
+  {
+    title: '查看教程',
+    desc: '学习如何使用 小明云加速',
+    icon: ''
+  },
+  {
+    title: '一键订阅',
+    desc: '快速将节点导入对应客户端进行使用',
+    icon: ''
+  },
+  {
+    title: '购买订阅',
+    desc: '对您当前的订阅进行购买',
+    icon: ''
+  },
+  {
+    title: '遇到问题',
+    desc: '遇到问题可以通过工单与我们沟通',
+    icon: ''
+  }
+]
+const clickFeature = (item) => {
+  if (item.title === '查看教程') {
+    router.push({ name: 'knowledge' })
+  } else if (item.title === '一键订阅') {
+    showModal.value = true
+  } else if (item.title === '购买订阅') {
+    router.push({ name: 'plan' })
+  } else {
+    router.push({ name: 'ticket' })
+  }
+}
 </script>
 <template>
   <n-card class="mt-20px" title="我的订阅">
@@ -14,11 +49,36 @@ const router = useRouter()
       <div class="text-gray">购买订阅</div>
     </div>
   </n-card>
-  <n-card class="mt-20px" title="捷径">
+  <n-card class="mt-20px pd0" title="捷径">
     <div>
-      <n-list>
-
+      <n-list hoverable clickable>
+        <n-list-item @click="clickFeature(item)" v-for="(item, index) in shortcuts" :key="index">
+          <div class="flex items-center justify-between">
+            <div>
+              <div class="text-16px">{{ item.title }}</div>
+              <div class="text-14px text-gray">{{ item.desc }}</div>
+            </div>
+            <div></div>
+          </div>
+        </n-list-item>
       </n-list>
     </div>
   </n-card>
+  <n-modal v-model:show="showModal" transform-origin="center">
+    <n-card style="width: 600px" :bordered="false" size="huge" role="dialog" aria-modal="true">
+      <n-list hoverable clickable>
+        <n-list-item></n-list-item>
+      </n-list>
+      <template #footer>
+        <div class="p10px">
+          <n-button class="w100%">123</n-button>
+        </div>
+      </template>
+    </n-card>
+  </n-modal>
 </template>
+<style>
+.pd0>.n-card__content {
+  padding: 0
+}
+</style>

@@ -20,7 +20,9 @@
           </header>
           <section class="flex-1 h-full bg-#f5f6fb p-15px">
             <!-- <component :is="currentComponent" /> -->
-            <Router-view></Router-view>
+            <n-modal-provider>
+              <Router-view></Router-view>
+            </n-modal-provider>
           </section>
         </article>
       </n-layout>
@@ -32,6 +34,7 @@
 import { h, ref } from "vue";
 import { RouterLink } from "vue-router";
 import personInfoPanel from "@/components/personInfoPanel.vue";
+
 const currentItem = ref('仪表盘')
 const titleMap = {
   'dashboard': '仪表盘',
