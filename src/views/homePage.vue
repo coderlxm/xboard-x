@@ -10,13 +10,15 @@
           <n-menu @update:value="handleMenuUpdate" :options="menuOptions" />
         </n-layout-sider>
         <article class="flex-col flex-1 overflow-hidden">
-          <header class="flex items-center bg-white px-15" style="height: 60px;">
-            <div>
-              <div>{{ currentItem }}</div>
-              <div></div>
+          <header class="flex items-center bg-white px-15px" style="height: 60px;">
+            <div class="flex items-center">{{ currentItem }}</div>
+            <div class="flex ml-auto items-center">
+              <n-dialog-provider>
+                <personInfoPanel :options="personInfoOptions"></personInfoPanel>
+              </n-dialog-provider>
             </div>
           </header>
-          <section class="flex-1 h-full bg-#f5f6fb">
+          <section class="flex-1 h-full bg-#f5f6fb p-15px">
             <!-- <component :is="currentComponent" /> -->
             <Router-view></Router-view>
           </section>
@@ -29,8 +31,26 @@
 <script setup>
 import { h, ref } from "vue";
 import { RouterLink } from "vue-router";
-const currentComponent = ref();
-const currentItem = ref('')
+import personInfoPanel from "@/components/personInfoPanel.vue";
+const currentItem = ref('仪表盘')
+const titleMap = {
+  'dashboard': '仪表盘',
+  'knowledge': '使用文档',
+  'order': '我的订单',
+  'invite': '我的邀请',
+  'plan': '购买订阅',
+  'node': '节点状态',
+  'profile': '个人中心',
+  'ticket': '我的工单',
+  'traffic': '流量明细',
+}
+const personInfoOptions = [
+  { label: '个人中心', key: 'person' },
+  { label: '登出', key: 'logout' }
+]
+const handleMenuUpdate = (value) => {
+  currentItem.value = titleMap[value]
+}
 // const componentMap = {
 //   '003': myOrders,
 //   '002': useDocument
