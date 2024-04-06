@@ -1,4 +1,4 @@
 <script setup></script>
 <template>
-  <div>dslgjk;</div>
+  <div>节点</div>
 </template>

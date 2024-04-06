@@ -17,7 +17,13 @@ const forgetPassword = () => {
 const login = async () => {
   if (username.value.trim() && pwd.value.trim()) {
     localStorage.setItem('token', 'admin')
-    await router.push({ name: 'home' })
+    router.push({ name: 'dashboard' }).then(() => {
+      notificationApiInjection.success({
+        content: "登录成功",
+        closable: false,
+        duration: 2000
+      })
+    })
   } else {
     notificationApiInjection.warning({
       content: "请输入用户名和密码",
