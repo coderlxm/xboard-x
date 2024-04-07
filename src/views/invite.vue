@@ -1,7 +1,8 @@
 <script setup>
-import { reactive, h } from "vue";
+import { reactive, h, ref } from "vue";
 import { NButton, useMessage } from "naive-ui";
 import balance from "@/components/balance.vue"
+import normalModal from "@/components/normalModal.vue";
 const message = useMessage()
 const columns = [
   {
@@ -52,12 +53,14 @@ const columnsForDelivery = [
     width: '200'
   }
 ]
+const isShowWithdraw = ref(false)
+const isShowTransfer = ref(false)
 </script>
 <template>
   <balance title="我的邀请" amountDesc="当前剩余佣金" #button>
     <div class="flex gap-15px">
-      <n-button size="small" color="#316c72">划转</n-button>
-      <n-button size="small" color="#316c72">推广佣金提现</n-button>
+      <n-button @click="isShowTransfer = true" size="small" color="#316c72">划转</n-button>
+      <n-button @click="isShowWithdraw = true" size="small" color="#316c72">推广佣金提现</n-button>
     </div>
   </balance>
   <n-card class="mb-15px">
@@ -89,4 +92,25 @@ const columnsForDelivery = [
   <n-card title="佣金发放记录">
     <n-data-table :columns="columnsForDelivery" :bordered="false"></n-data-table>
   </n-card>
+  <normalModal title="推广佣金划转至余额" v-model="isShowWithdraw">
+    <div>
+      <div class="mb-5px">提现方式</div>
+      <n-select placeholder="请选择提现方式" :options="ticketLevel"></n-select>
+    </div>
+    <div>
+      <div class="mb-5px">提现账号</div>
+      <n-input placeholder="请选择提现账号"></n-input>
+    </div>
+  </normalModal>
+  <normalModal title="推广佣金划转至余额" v-model="isShowTransfer">
+    <n-alert type="warning">划转后的余额仅用于小明云加速消费使用</n-alert>
+    <div>
+      <div class="mb-5px">提现方式</div>
+      <n-select placeholder="请选择提现方式" :options="ticketLevel"></n-select>
+    </div>
+    <div>
+      <div class="mb-5px">提现账号</div>
+      <n-input placeholder="请选择提现账号"></n-input>
+    </div>
+  </normalModal>
 </template>
