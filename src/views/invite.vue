@@ -92,18 +92,18 @@ const isShowTransfer = ref(false)
   <n-card title="佣金发放记录">
     <n-data-table :columns="columnsForDelivery" :bordered="false"></n-data-table>
   </n-card>
-  <normalModal title="推广佣金划转至余额" v-model="isShowWithdraw">
-    <div>
-      <div class="mb-5px">提现方式</div>
-      <n-select placeholder="请选择提现方式" :options="ticketLevel"></n-select>
+  <normalModal title="划转" v-model="isShowTransfer">
+    <n-alert type="warning">划转后的余额仅用于小明云加速消费使用</n-alert>
+    <div class="mt-10px">
+      <div class="mb-5px">当前推广佣金余额</div>
+      <n-input disabled placeholder="0.00"></n-input>
     </div>
     <div>
-      <div class="mb-5px">提现账号</div>
+      <div class="mb-5px">划转金额</div>
       <n-input placeholder="请选择提现账号"></n-input>
     </div>
   </normalModal>
-  <normalModal title="推广佣金划转至余额" v-model="isShowTransfer">
-    <n-alert type="warning">划转后的余额仅用于小明云加速消费使用</n-alert>
+  <normalModal title="推广佣金划转至余额" v-model="isShowWithdraw">
     <div>
       <div class="mb-5px">提现方式</div>
       <n-select placeholder="请选择提现方式" :options="ticketLevel"></n-select>
