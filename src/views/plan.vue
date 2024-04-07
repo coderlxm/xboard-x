@@ -1,6 +1,6 @@
 <script setup>
 import { ref } from "vue";
-const plan = ref()
+const plan = ref('all')
 const planOptions = [
   {
     label: '全部',

@@ -1,6 +1,7 @@
 <script setup>
 import { reactive, h } from "vue";
 import { NButton, useMessage } from "naive-ui";
+import balance from "@/components/balance.vue"
 const message = useMessage()
 const columns = [
   {
@@ -53,22 +54,12 @@ const columnsForDelivery = [
 ]
 </script>
 <template>
-  <n-card class="mb-15px" title="我的邀请">
-    <template #header-extra>
-      icon
-    </template>
-    <div class="flex flex-col gap-10px">
-      <div>
-        <span class="text-50px font-400">0.00</span>
-        <span class="ml-20px text-#6c757d text-20px">CNY</span>
-      </div>
-      <div class="text-gray">当前剩余佣金</div>
-      <div class="flex gap-15px">
-        <n-button size="small" color="#316c72">划转</n-button>
-        <n-button size="small" color="#316c72">推广佣金提现</n-button>
-      </div>
+  <balance title="我的邀请" amountDesc="当前剩余佣金" #button>
+    <div class="flex gap-15px">
+      <n-button size="small" color="#316c72">划转</n-button>
+      <n-button size="small" color="#316c72">推广佣金提现</n-button>
     </div>
-  </n-card>
+  </balance>
   <n-card class="mb-15px">
     <div class="flex flex-col gap-10px">
       <div class="w-full flex justify-between">
