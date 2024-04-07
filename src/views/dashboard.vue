@@ -25,6 +25,20 @@ const shortcuts = [
     icon: ''
   }
 ]
+const subOptions = [
+  {
+    desc: '复制订阅地址',
+  },
+  {
+    desc: '扫描二维码订阅',
+  },
+  {
+    desc: '导入到Hiddify Next',
+  },
+  {
+    desc: '导入到Clash',
+  },
+]
 const clickFeature = (item) => {
   if (item.title === '查看教程') {
     router.push({ name: 'knowledge' })
@@ -35,6 +49,9 @@ const clickFeature = (item) => {
   } else {
     router.push({ name: 'ticket' })
   }
+}
+const viewTutorial = () => {
+  router.push({ name: 'knowledge' })
 }
 </script>
 <template>
@@ -65,13 +82,19 @@ const clickFeature = (item) => {
     </div>
   </n-card>
   <n-modal v-model:show="showModal" transform-origin="center">
-    <n-card style="width: 600px" :bordered="false" size="huge" role="dialog" aria-modal="true">
+    <n-card class="w-300px pd0 footer0" :bordered="false" size="huge" role="dialog" aria-modal="true">
       <n-list hoverable clickable>
-        <n-list-item></n-list-item>
+        <n-list-item v-for="(item, index) in subOptions" :key="index">
+          <div class="flex cursor-pointer items-center pb-10px pl-20px pr-20px pt-10px">
+            <div></div>
+            <div>{{ item.desc }}</div>
+          </div>
+        </n-list-item>
+        <div class="n-list-item__divider"></div>
       </n-list>
       <template #footer>
         <div class="p10px">
-          <n-button class="w100%">123</n-button>
+          <n-button @click="viewTutorial" class="w100% h-40px" color="#316c72">不会使用，查看使用教程</n-button>
         </div>
       </template>
     </n-card>
@@ -80,5 +103,13 @@ const clickFeature = (item) => {
 <style>
 .pd0>.n-card__content {
   padding: 0
+}
+
+.footer0>.n-card__footer {
+  padding: 0;
+}
+
+.footer0>.n-card__content:first-child {
+  padding-top: 0;
 }
 </style>

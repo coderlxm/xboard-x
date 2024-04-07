@@ -7,9 +7,9 @@
           <div class="h-60px flex justify-center">
             <h2 class="text-16px ml-10px max-w-140px flex-shrink-0 color-primary">小明云加速</h2>
           </div>
-          <n-menu @update:value="handleMenuUpdate" :options="menuOptions" />
+          <n-menu v-model:value="activeKey" :options="menuOptions" />
         </n-layout-sider>
-        <article class="flex-col flex-1 overflow-hidden">
+        <article class="flex flex-col flex-1 overflow-hidden">
           <header class="flex items-center bg-white px-15px" style="height: 60px;">
             <div class="flex items-center">{{ currentItem }}</div>
             <div class="flex ml-auto items-center">
@@ -18,11 +18,14 @@
               </n-dialog-provider>
             </div>
           </header>
-          <section class="flex-1 h-full bg-#f5f6fb p-15px">
-            <!-- <component :is="currentComponent" /> -->
-            <n-modal-provider>
-              <Router-view></Router-view>
-            </n-modal-provider>
+          <section class="flex-1 overflow-hidden">
+            <section style="overflow-y: auto;"
+              class="w-full h-full flex flex-col bg-[#f5f6fb] p-5px dark:bg-hex-121212 md:p-15px">
+              <!-- <component :is="currentComponent" /> -->
+              <n-modal-provider>
+                <Router-view></Router-view>
+              </n-modal-provider>
+            </section>
           </section>
         </article>
       </n-layout>
@@ -31,11 +34,12 @@
 </template>
 
 <script setup>
-import { h, ref } from "vue";
-import { RouterLink } from "vue-router";
+import { h, ref, watchEffect } from "vue";
+import { RouterLink, useRoute } from "vue-router";
 import personInfoPanel from "@/components/personInfoPanel.vue";
 
 const currentItem = ref('仪表盘')
+const route = useRoute()
 const titleMap = {
   'dashboard': '仪表盘',
   'knowledge': '使用文档',
@@ -51,9 +55,7 @@ const personInfoOptions = [
   { label: '个人中心', key: 'person' },
   { label: '登出', key: 'logout' }
 ]
-const handleMenuUpdate = (value) => {
-  currentItem.value = titleMap[value]
-}
+const activeKey = ref(null)
 // const componentMap = {
 //   '003': myOrders,
 //   '002': useDocument
@@ -273,4 +275,9 @@ const menuOptions = [
 //   }
 //   // ...其他分组或菜单项
 // ]
+
+watchEffect(() => {
+  currentItem.value = titleMap[route.name]
+  activeKey.value = route.name
+})
 </script>

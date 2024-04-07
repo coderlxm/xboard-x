@@ -11,4 +11,8 @@ import { RouterView } from "vue-router";
   </n-loading-bar-provider>
 </template>
 
-<style scoped></style>
+<style>
+* {
+  box-sizing: border-box;
+}
+</style>
