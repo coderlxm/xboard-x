@@ -23,7 +23,9 @@
               class="w-full h-full flex flex-col bg-[#f5f6fb] p-5px dark:bg-hex-121212 md:p-15px">
               <!-- <component :is="currentComponent" /> -->
               <n-modal-provider>
-                <Router-view></Router-view>
+                <n-message-provider>
+                  <Router-view></Router-view>
+                </n-message-provider>
               </n-modal-provider>
             </section>
           </section>
