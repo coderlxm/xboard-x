@@ -27,12 +27,9 @@ const cancel = () => {
     </n-card>
   </n-modal>
 </template>
-<style>
-.ticketModal>.n-card__content {
-  border-top: 1px solid rgb(239, 239, 245)
-}
-
-.ticketModal>.n-card__content {
+<style scoped>
+.ticketModal :deep(.n-card__content) {
+  border-top: 1px solid rgb(239, 239, 245);
   border-bottom: 1px solid rgb(239, 239, 245)
 }
 </style>
