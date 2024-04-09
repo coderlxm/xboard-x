@@ -1,13 +1,13 @@
 import axios from "axios";
-import { isProd } from "./env";
-const instance = axios.create({
-  baseURL: '',
+// import { isProd } from "./env";
+export const http = axios.create({
+  // baseURL: '',
   timeout: 10000,
-  withCredentials: true,
+  // withCredentials: true,
   headers: { "Content-Type": "application/json" }
 })
 
-instance.interceptors.request.use((config) => {
+http.interceptors.request.use((config) => {
   /* 
     jwt: json web token 无状态的管理机制，更适合跨平台及移动端应用，但要注意xss攻击
     前端需要在请求头携带这个token将请求发出，不需要维护cookie
@@ -15,4 +15,10 @@ instance.interceptors.request.use((config) => {
     且需要准备防csrf的方案 更适合传统应用 但要处理跨域问题 不需要在请求头设置token，因为cookie会被浏览器自己携带
     
   */
+  return config
+})
+http.interceptors.response.use((res) => {
+  return res.data
+}, (err) => {
+  return Promise.reject(err)
 })
